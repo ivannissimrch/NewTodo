@@ -11,7 +11,9 @@ const createApp = () => {
 };
 
 const markCompleted = (event) => {
-  console.log(event.target.id);
+  const itemId = event.target.id.slice(3);
+  const itemToMark = document.getElementById(itemId);
+  itemToMark.classList.add("completed");
 };
 
 const createToDo = (event) => {
@@ -22,7 +24,7 @@ const createToDo = (event) => {
         <input type="text" class="todoLabel" readonly  id=${inputValue.value} value=${inputValue.value}></input>
         <button class="del-btn">del</button>
          <button class="edit-btn">edit</button>
-          <button class="compl-btn" id=${inputValue.value}>compl</button>
+          <button class="compl-btn" id=btn${inputValue.value}>compl</button>
 
     </div>`;
 
