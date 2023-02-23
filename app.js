@@ -1,5 +1,7 @@
+//maybe use this a storage?
 const store = [];
 
+//funtions
 const createApp = () => {
   return `<div class="main-container">
       <form action="">
@@ -10,33 +12,12 @@ const createApp = () => {
     </div>`;
 };
 
-const markCompleted = (event) => {
-  const itemId = event.target.id.slice(3);
-  const itemToMark = document.getElementById(itemId);
-  itemToMark.classList.add("completed");
-};
-
-const deleteToDo = (event) => {
-  const itemId = event.target.id.slice(3);
-  console.log(itemId);
-  const itemToDelete = document.getElementById(`container${itemId}`);
-  itemToDelete.remove();
-};
-
-const editToDo = (event) => {
-  const itemId = event.target.id.slice(4);
-  const itemToEdit = document.getElementById(itemId);
-  itemToEdit.readOnly = false;
-  itemToEdit.focus();
-  itemToEdit.classList.remove("completed");
-};
-
 const createToDo = (event) => {
   event.preventDefault();
   const results = document.getElementsByClassName("results-container")[0];
   let inputValue = document.getElementById("create-input");
   results.innerHTML += `<div class="toDoListContainer" id=container${inputValue.value}>
-        <input type="text" class="todoLabel" readonly  id=${inputValue.value} value=${inputValue.value}></input>
+        <input type="text" class="todoLabel" readonly  id=${inputValue.value} value="${inputValue.value}"></input>
         <button class="del-btn" id=del${inputValue.value}>del</button>
          <button class="edit-btn" id=edit${inputValue.value}>edit</button>
           <button class="compl-btn" id=btn${inputValue.value}>compl</button>
@@ -65,8 +46,36 @@ const createToDo = (event) => {
   inputValue.focus();
 };
 
+const deleteToDo = (event) => {
+  const itemId = event.target.id.slice(3);
+  console.log(itemId);
+  const itemToDelete = document.getElementById(`container${itemId}`);
+  itemToDelete.remove();
+};
+
+const editToDo = (event) => {
+  const itemId = event.target.id.slice(4);
+  const itemToEdit = document.getElementById(itemId);
+  itemToEdit.readOnly = false;
+  itemToEdit.focus();
+  itemToEdit.classList.remove("completed");
+  itemToEdit.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      itemToEdit.readOnly = true;
+    }
+  });
+};
+const markCompleted = (event) => {
+  const itemId = event.target.id.slice(3);
+  const itemToMark = document.getElementById(itemId);
+  itemToMark.classList.add("completed");
+};
+//functions
+
+//initialize app
 const root = document.getElementById("root");
 root.innerHTML = createApp();
 
+//add event listener to main button, create todo
 const createToDoBtn = document.getElementById("create-btn");
 createToDoBtn.addEventListener("click", createToDo);
