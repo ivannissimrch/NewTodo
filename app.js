@@ -2,6 +2,7 @@
 const store = [];
 
 //funtions
+//create and initialize app
 const createApp = () => {
   return `<div class="main-container">
       <form action="">
